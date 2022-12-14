@@ -16,9 +16,7 @@ use App\Http\Controllers\InventoryController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',[ProductsController::class,'index']);
 Route::get('/products',[ProductsController::class,'index']);
 Route::get('/products/create',[ProductsController::class,'create']);
 Route::post('/products/confirm',[ProductsController::class,'confirm']);
