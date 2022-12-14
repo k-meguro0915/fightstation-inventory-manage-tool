@@ -14,6 +14,7 @@
         <th scope="col">ID</th>
         <th scope="col">商品名</th>
         <th scope="col">商品価格</th>
+        <th scope="col">獲得ポイント</th>
         <th scope="col">編集/削除</th>
       </tr>
     </thead>
@@ -24,6 +25,7 @@
           <td>{{$value['product_id']}}</td>
           <td>{{$value['product_name']}}</td>
           <td>{{$value['product_price']}}</td>
+          <td>{{$value['product_point']}}</td>
           <td><a href="/products/update/{{$value['product_id']}}">編集</a></td>
         </tr>
       @endforeach

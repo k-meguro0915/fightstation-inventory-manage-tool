@@ -14,6 +14,8 @@
     <input name="product_name" type="text" class="form-control" id="productName" readonly="" value="{{ $confirm->product_name }}">
     <label for="productPrice" class="form-label">価格</label>
     <input name="product_price" type="number" class="form-control" id="productPrice" readonly="" value="{{ $confirm->product_price }}">
+    <label for="productPoint" class="form-label">獲得ポイント</label>
+    <input name="product_point" type="number" class="form-control" id="productPoint" readonly="" value="{{ $confirm->product_point }}">
     <button type="button" class="btn btn-primary my-3" onclick="submit()">確定</button>
   </form>
 </div>

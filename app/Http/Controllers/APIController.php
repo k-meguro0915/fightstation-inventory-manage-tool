@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 // サービス呼び出し
 use App\Services\StationService;
 use App\Services\ProductService;
+use App\Services\SoldLogService;
 use App\Services\InventoryService;
+
 class APIController extends Controller
 {
     protected $error_msg_key = 'wrong or nothing API Key';
@@ -24,6 +26,8 @@ class APIController extends Controller
         if($this->checkAPIKey($request)){
           $service = new InventoryService;
           $ret = $service->decrease($request->station_id, $request->product_id);
+          $service = new SoldLogService;
+          $ret = $service->saveLog($request->station_id,$request->product_id);
           $result = [
             'result' => $ret
           ];

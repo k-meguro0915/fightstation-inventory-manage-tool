@@ -13,7 +13,6 @@
       <tr>
         <th scope="col">ID</th>
         <th scope="col">ステーション名</th>
-        <th scope="col">設置場所</th>
         <th scope="col">在庫確認・編集</th>
         <th scope="col">編集/削除</th>
       </tr>
@@ -24,7 +23,6 @@
           <?php $value = $value->getAttributes();?>
           <td>{{$value['station_id']}}</td>
           <td>{{$value['station_name']}}</td>
-          <td>{{$value['prefecture']}}{{$value['address']}}</td>
           <td><a href="/inventory/check/{{$value['station_id']}}">在庫確認</a></td>
           <td><a href="/stations/update/{{$value['station_id']}}">編集</a></td>
         </tr>

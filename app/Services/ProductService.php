@@ -21,7 +21,8 @@ class ProductService{
       $item=[
         'product_id' => $request->product_id,
         'product_name' => $request->product_name,
-        'product_price' => $request->product_price
+        'product_price' => $request->product_price,
+        'product_point' => $request->product_point,
       ];
       Product::upsert($item,['product_id']);
       DB::commit();
