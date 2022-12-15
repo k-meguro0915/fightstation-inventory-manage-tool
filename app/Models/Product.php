@@ -11,6 +11,7 @@ class Product extends Model
     protected $table = 'tbl_product';
     protected $fillable = [
       'product_id',
+      'jan_code',
       'product_name',
       'product_price',
       'product_point'

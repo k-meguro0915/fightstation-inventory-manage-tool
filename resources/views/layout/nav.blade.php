@@ -8,6 +8,9 @@
   <div class="collapse navbar-collapse" id="hm-menu">
     <ul class="navbar-nav mr-auto">
       <li id="route" class="nav-item">
+        <a class="nav-link" href="/company">導入企業一覧 <span class="sr-only">(current)</span></a>
+      </li>
+      <li id="route" class="nav-item">
         <a class="nav-link" href="/products">商品一覧 <span class="sr-only">(current)</span></a>
       </li>
       <li id="route" class="nav-item">

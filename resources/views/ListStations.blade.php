@@ -11,7 +11,8 @@
   <table class="table">
     <thead>
       <tr>
-        <th scope="col">ID</th>
+        <th scope="col">導入企業ID</th>
+        <th scope="col">ステーションID</th>
         <th scope="col">ステーション名</th>
         <th scope="col">在庫確認・編集</th>
         <th scope="col">編集/削除</th>
@@ -21,6 +22,7 @@
       @foreach($stations as $key => $value)
         <tr>
           <?php $value = $value->getAttributes();?>
+          <td>{{$value['company_id']}}</td>
           <td>{{$value['station_id']}}</td>
           <td>{{$value['station_name']}}</td>
           <td><a href="/inventory/check/{{$value['station_id']}}">在庫確認</a></td>

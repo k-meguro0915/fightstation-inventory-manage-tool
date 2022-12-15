@@ -9,6 +9,8 @@
     @csrf
     <label for="productId" class="form-label">商品ID</label>
     <input name="product_id" type="text" class="form-control" id="productId" value="{{$product['product_id']}}">
+    <label for="janCode" class="form-label">JANコード</label>
+    <input name="jan_code" type="text" class="form-control" id="janCode" minlength="8" maxlength="13"  value="{{$product['jan_code']}}">
     <label for="productName" class="form-label">商品名</label>
     <input name="product_name" type="text" class="form-control" id="productName" value="{{$product['product_name']}}">
     <label for="productPrice" class="form-label">価格</label>

@@ -20,6 +20,7 @@ class ProductService{
     try{
       $item=[
         'product_id' => $request->product_id,
+        'jan_code' => $request->jan_code,
         'product_name' => $request->product_name,
         'product_price' => $request->product_price,
         'product_point' => $request->product_point,

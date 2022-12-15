@@ -7,14 +7,12 @@
   <h2 class="mb-5">ステーション情報登録</h2>
   <form action="/stations/confirm" method="POST">
     @csrf
+    <label for="companyId" class="form-label">導入企業ID</label>
+    <input name="company_id" type="text" class="form-control" id="companyId">
     <label for="stationId" class="form-label">ステーションID</label>
     <input name="station_id" type="text" class="form-control" id="stationId">
     <label for="stationName" class="form-label">ステーション名</label>
     <input name="station_name" type="text" class="form-control" id="stationName">
-    <label for="stationPrefecture" class="form-label">都道府県</label>
-    <input name="station_prefecture" type="text" class="form-control" id="stationPrefecture">
-    <label for="stationAddress" class="form-label">市区町村以下</label>
-    <input name="station_address" type="text" class="form-control" id="stationAddress">
 
     <h3 class="my-3">在庫情報</h3>
     @for($i=1;$i < $input_field; $i++)
