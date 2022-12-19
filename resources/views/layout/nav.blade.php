@@ -23,6 +23,12 @@
         <a class="nav-link" href="/create_roadstation">道の駅新規登録</a>
       </li> -->
     </ul>
+    <form method="POST" action="{{ route('logout') }}" class="float-right">
+      @csrf
+      <button type="submit" class="btn btn-link">
+          ログアウト
+      </button>
+    </form>
   </div>
 </nav>
 @endsection

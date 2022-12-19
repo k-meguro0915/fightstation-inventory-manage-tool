@@ -20,6 +20,7 @@ class CompanyService{
     try{
       $item=[
         'company_id' => $request['company_id'],
+        'manager_id' => $request['manager_id'],
         'company_name' => $request['company_name'],
         'prefecture' => $request['prefecture'],
         'address' => $request['address']

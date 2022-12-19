@@ -32,7 +32,7 @@ class ProductsController extends Controller
     public function confirm(Request $request){
       // $ret = $this->service->store($request);
       return view('ConfirmProduct',[
-        'confirm' => $request
+        'product' => $request
       ]);
     }
     public function commit(Request $request){

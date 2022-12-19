@@ -4,7 +4,6 @@
 
 @section('content')
 <div class="my-5">
-  <h2 class="mb-5">ステーション情報登録</h2>
   <form action="/inventory/commit" method="POST">
     @csrf
     <h3 class="my-3">在庫情報</h3>

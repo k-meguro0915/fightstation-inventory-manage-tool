@@ -11,6 +11,7 @@ class ImplementCompany extends Model
     protected $table = 'tbl_implementing_company';
     protected $fillable = [
       'company_id',
+      'manager_id',
       'prefecture',
       'address'
     ];
