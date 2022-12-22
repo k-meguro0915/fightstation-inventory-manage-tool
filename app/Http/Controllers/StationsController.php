@@ -16,7 +16,7 @@ class StationsController extends Controller
     }
     public function index(){
       $list = $this->service->all();
-      return view('ListStations',[
+      return view('StationInventory',[
         "stations" => $list
       ]);
     }

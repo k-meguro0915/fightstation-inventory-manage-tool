@@ -13,9 +13,11 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     @foreach( config('paging.nav_bar') as $key => $value)
-                    <x-nav-link href="{{$value['link']}}">
-                      {{$value['name']}}
-                    </x-nav-link>
+                      @if( ($USER->id == 1 && $value['role'] == 1) || ($USER->id != 1 && $value['role'] == 2) )
+                      <x-nav-link href="{{$value['link']}}">
+                        {{$value['name']}}
+                      </x-nav-link>
+                      @endif
                     @endforeach
                 </div>
             </div>
@@ -36,8 +38,8 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
+                        <x-dropdown-link href="/user/{{ Auth::user()->id }}/edit/email">
+                            メールアドレス変更
                         </x-dropdown-link>
 
                         <!-- Authentication -->
@@ -82,10 +84,6 @@
             </div>
 
             <div class="mt-3 space-y-1">
-                <x-responsive-nav-link :href="route('profile.edit')">
-                    {{ __('Profile') }}
-                </x-responsive-nav-link>
-
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf

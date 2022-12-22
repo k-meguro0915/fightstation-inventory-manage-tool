@@ -5,6 +5,8 @@ use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\StationsController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\ManagerController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,7 +32,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
+Route::get('/user/{user_id}/edit/email',[UserController::class,'edit_email']);
+Route::post('/user/{user_id}/edit/email/commit',[UserController::class,'commit_email']);
 require __DIR__.'/auth.php';
 
 Route::get('/company',[CompanyController::class,'index']);
@@ -38,6 +41,10 @@ Route::get('/company/create',[CompanyController::class,'create']);
 Route::post('/company/confirm',[CompanyController::class,'confirm']);
 Route::post('/company/commit',[CompanyController::class,'commit']);
 Route::get('/company/update/{company_id}',[CompanyController::class,'edit']);
+
+Route::get('/managers',[ManagerController::class,'index']);
+Route::get('/managers/create',[ManagerController::class,'create']);
+Route::post('/managers/commit',[ManagerController::class,'commit']);
 
 Route::get('/products',[ProductsController::class,'index']);
 Route::get('/products/create',[ProductsController::class,'create']);
