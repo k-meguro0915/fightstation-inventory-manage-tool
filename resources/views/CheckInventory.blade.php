@@ -8,12 +8,12 @@
     @csrf
     @foreach($inventory as $key => $value)
     <?php $value = $value->getAttributes();?>
-    <div class="flex flex-row flex-wrap mb-5">
-      <label for="products" class="mx-2">商品名</label>
+    <div class="flex lg:flex-row flex-col flex-wrap mb-5 p-2">
+      <label for="products" class="lg:mx-2  mx-0">商品名</label>
       <input type="text" readonly="" class="rounded bg-gray-300" value="{{$value['product_name']}}">
-      <label for="inventory" class="mx-2">在庫数</label>
-      <input type="number" readonly="" class="rounded bg-gray-300 mx-2" id="inventory" value="{{$value['inventory']}}">
-      <label for="current_inventory" class="mx-2">現在の在庫数</label>
+      <label for="inventory" class="lg:mx-2 mx-0">在庫数</label>
+      <input type="number" readonly="" class="rounded bg-gray-300" id="inventory" value="{{$value['inventory']}}">
+      <label for="current_inventory" class="lg:mx-2 mx-0">現在の在庫数</label>
       <input type="number" name="inventory[{{$key}}][inventory]" class="rounded" value="{{$value['current_inventory']}}">
       <input type="hidden" name="inventory[{{$key}}][product_id]" value="{{$value['product_id']}}">
       <input type="hidden" name="inventory[{{$key}}][station_id]" value="{{$value['station_id']}}">
