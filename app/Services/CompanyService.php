@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Log;
 use App\Models\ImplementCompany;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CompanyService{
   public function all(){
@@ -26,6 +27,17 @@ class CompanyService{
         'address' => $request['address']
       ];
       ImplementCompany::upsert($item,['company_id']);
+      DB::commit();
+    } catch (\Exception $e) {
+      DB::rollback();
+      return $e->getMessage();
+    }
+    return 'true';
+  }
+  public function delete($company_id){
+    DB::beginTransaction();
+    try{
+      ImplementCompany::where(['company_id'=>$company_id])->delete();
       DB::commit();
     } catch (\Exception $e) {
       DB::rollback();

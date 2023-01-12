@@ -1,5 +1,5 @@
 @extends('layout/template')
-@section('title','商品一覧')
+@section('title','ファイトステーション一覧')
 @section('description','ディスクリプション')
 
 @section('content')
@@ -22,9 +22,15 @@
           <?php $value = $value->getAttributes();?>
           <td class="border">{{$value['company_id']}}</td>
           <td class="border">{{$value['station_id']}}</td>
-          <td class="border">{{$value['station_name']}}</td>
-          <td class="border text-blue-500 hover:text-blue-400 underline"><a href="/inventory/check/{{$value['station_id']}}">在庫確認</a></td>
-          <td class="border text-blue-500 hover:text-blue-400 underline"><a href="/stations/update/{{$value['station_id']}}">編集</a></td>
+          <td class="border">{{$value['station_name']}}
+            {{var_dump($USER)}}</td>
+          <td class="border text-blue-500 hover:text-blue-400 underline">
+            <a href="/inventory/check/{{$value['station_id']}}">在庫確認</a>
+            @if( $USER->id == 1 )
+              <label>/</label>
+              <a href="/stations/update/{{$value['station_id']}}">編集</a>
+            @endif
+          </td>
         </tr>
       @endforeach
     </tbody>

@@ -24,7 +24,11 @@
           <td class="border">{{$value['product_name']}}</td>
           <td class="border">{{$value['product_price']}}</td>
           <td class="border">{{$value['product_point']}}</td>
-          <td class="border text-blue-500 hover:text-blue-400 underline"><a href="/products/update/{{$value['product_id']}}">編集</a></td>
+          <td class="border">
+              <a class="text-blue-500 hover:text-blue-400 underline" href="/products/update/{{$value['product_id']}}">編集</a>
+              <label>/</label>
+              <a class="text-red-500 hover:text-red-400 underline" href="/products/delete/{{$value['product_id']}}">削除</a>
+          </td>
         </tr>
       @endforeach
     </tbody>

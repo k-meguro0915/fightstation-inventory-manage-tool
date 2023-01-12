@@ -31,6 +31,13 @@ class ProductsController extends Controller
     }
     public function confirm(Request $request){
       // $ret = $this->service->store($request);
+      $this->validate($request, [
+        'product_id' => 'required',
+        'jan_code' => 'required|integer',
+        'product_name' => 'required',
+        'product_price' => 'required|integer|min:0',
+        'product_point' => 'required|integer|min:0',
+      ]);
       return view('ConfirmProduct',[
         'product' => $request
       ]);
@@ -40,7 +47,9 @@ class ProductsController extends Controller
       $message = $ret == 'true' ? '登録が完了しました。' : $ret;
       return redirect('/products')->with('flash_message',$message);
     }
-    public function delete(){
-      
+    public function delete($product_id){
+      $ret = $this->service->delete($product_id);
+      $message = $ret == 'true' ? '削除が完了しました。' : $ret;
+      return redirect('/products')->with('flash_message',$message);
     }
 }

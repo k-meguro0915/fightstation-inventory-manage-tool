@@ -20,7 +20,11 @@
           <?php $value = $value->getAttributes();?>
           <td class="border">{{$value['id']}}</td>
           <td class="border">{{$value['name']}}</td>
-          <td class="border text-blue-500 hover:text-blue-400 underline"><a href="/managers/create">編集</a></td>
+          <td class="border">
+              <a class="text-blue-500 hover:text-blue-400 underline" href="/managers/edit/{{$value['id']}}">編集</a>
+              <label>/</label>
+              <a class="text-red-500 hover:text-red-400 underline" href="/managers/delete/{{$value['id']}}">削除</a>
+          </td>
         </tr>
       @endforeach
     </tbody>

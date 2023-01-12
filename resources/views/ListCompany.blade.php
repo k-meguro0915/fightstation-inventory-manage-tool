@@ -24,7 +24,11 @@
           <td class="border">{{$value['manager_id']}}</td>
           <td class="border">{{$value['company_name']}}</td>
           <td class="border">{{$value['prefecture']}}{{$value['address']}}</td>
-          <td class="border text-blue-500 hover:text-blue-400 underline"><a href="/company/update/{{$value['company_id']}}">編集</a></td>
+          <td class="border">
+            <a class="text-blue-500 hover:text-blue-400 underline" href="/company/update/{{$value['company_id']}}">編集</a>
+            <span>/</span>
+            <a class="text-red-500 hover:text-red-400 underline" href="/company/delete/{{$value['company_id']}}">削除</a>
+          </td>
         </tr>
       @endforeach
     </tbody>

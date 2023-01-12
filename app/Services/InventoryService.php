@@ -50,6 +50,9 @@ class InventoryService{
     DB::beginTransaction();
     try{
       StationInventory::where([['station_id', $station_id],['product_id', $product_id]])->decrement('current_inventory',1);
+      // 在庫の全体量をチェック
+      // 現在庫が全体量の20％を切っていたら通知を飛ばす
+      
       DB::commit();
     } catch (\Exception $e) {
       DB::rollback();

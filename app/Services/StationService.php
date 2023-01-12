@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 class StationService{
   public function all(){
     $ret = [];
-    $rv = Station::orderBy('station_id','asc')->get();
+    $rv = Station::orderBy('station_id','asc')->join('users','tbl_station.manager_id','=','users.id')->get();
     return $rv;
   }
   public function get($station_id){
@@ -35,6 +35,17 @@ class StationService{
         ];
         StationInventory::upsert($item,['station_id','product_id']);
       }
+      DB::commit();
+    } catch (\Exception $e) {
+      DB::rollback();
+      return $e->getMessage();
+    }
+    return 'true';
+  }
+  public function delete($station_id){
+    DB::beginTransaction();
+    try{
+      Station::where(['station_id'=>$station_id])->delete();
       DB::commit();
     } catch (\Exception $e) {
       DB::rollback();

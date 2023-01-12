@@ -41,10 +41,14 @@ Route::get('/company/create',[CompanyController::class,'create']);
 Route::post('/company/confirm',[CompanyController::class,'confirm']);
 Route::post('/company/commit',[CompanyController::class,'commit']);
 Route::get('/company/update/{company_id}',[CompanyController::class,'edit']);
+Route::get('/company/delete/{company_id}',[CompanyController::class,'delete']);
 
 Route::get('/managers',[ManagerController::class,'index']);
 Route::get('/managers/create',[ManagerController::class,'create']);
+Route::get('/managers/edit/{user_id}',[ManagerController::class,'edit']);
 Route::post('/managers/commit',[ManagerController::class,'commit']);
+Route::post('/managers/update',[ManagerController::class,'update']);
+Route::get('/managers/delete/{user_id}',[ManagerController::class,'delete']);
 
 Route::get('/products',[ProductsController::class,'index']);
 Route::get('/products/create',[ProductsController::class,'create']);
@@ -58,6 +62,9 @@ Route::get('/stations/create',[StationsController::class,'create']);
 Route::post('/stations/confirm',[StationsController::class,'confirm']);
 Route::post('/stations/commit',[StationsController::class,'commit']);
 Route::get('/stations/update/{station_id}',[StationsController::class,'edit']);
+Route::get('/stations/delete/{station_id}',[StationsController::class,'delete']);
 
 Route::get('/inventory/check/{station_id}',[InventoryController::class,'check']);
 Route::post('/inventory/commit',[InventoryController::class,'commit']);
+
+Route::post('/config/point',[PointController::class,'index']);

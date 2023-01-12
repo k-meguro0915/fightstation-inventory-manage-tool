@@ -1,10 +1,13 @@
 @extends('layout/template')
-@section('title','ステーション一覧')
+@section('title','ファイトステーション一覧')
 @section('description','ディスクリプション')
 
 @section('content')
+  @if( $USER->id == 1 )
   <div class="mb-5">
+    <a class="d-inline float-right my-3 bg-blue-500 hover:bg-blue-400 text-white rounded px-4 py-2" href="/stations/create">新規登録</a>
   </div>
+  @endif
   <table class="table-auto w-full my-5">
     <thead>
       <tr>
@@ -21,7 +24,15 @@
           <td class="border">{{$value['company_id']}}</td>
           <td class="border">{{$value['station_id']}}</td>
           <td class="border">{{$value['station_name']}}</td>
-          <td class="border text-blue-500 hover:text-blue-400 underline"><a href="/inventory/check/{{$value['station_id']}}">在庫確認</a></td>
+          <td class="border">
+            <a class="text-blue-500 hover:text-blue-400 underline" href="/inventory/check/{{$value['station_id']}}">在庫確認</a>
+            @if( $USER->id == 1 )
+              <label>/</label>
+              <a class="text-blue-500 hover:text-blue-400 underline" href="/stations/update/{{$value['station_id']}}">編集</a>
+              <label>/</label>
+              <a class="text-red-500 hover:text-red-400 underline" href="/stations/delete/{{$value['station_id']}}">削除</a>
+            @endif
+          </td>
         </tr>
       @endforeach
     </tbody>

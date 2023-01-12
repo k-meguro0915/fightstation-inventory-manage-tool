@@ -43,6 +43,10 @@ class StationsController extends Controller
     }
     public function confirm(Request $request){
       // $ret = $this->service->store($request);
+      $this->validate($request, [
+        'company_id' => 'required',
+        'station_id' => 'required',
+      ]);
       $products_service = new ProductService;
       $products = $products_service->all();
       return view('ConfirmStation',[
@@ -55,7 +59,9 @@ class StationsController extends Controller
       $message = $ret == 'true' ? '登録が完了しました。' : $ret;
       return redirect('/stations')->with('flash_message',$message);
     }
-    public function delete(){
-      
+    public function delete($station_id){
+      $ret = $this->service->delete($station_id);
+      $message = $ret == 'true' ? '登録が完了しました。' : $ret;
+      return redirect('/stations')->with('flash_message',$message);
     }
 }

@@ -20,6 +20,9 @@ class UserController extends Controller
     ]);
   }
   public function commit_email(Request $request){
+    $this->validate($request, [
+      'email' => 'required|email',
+    ]);
     $ret = $this->service->commit_email($request);
     $message = $ret == 'true' ? '設定が完了しました' : $ret;
     return redirect('/stations')->with('flash_message',$message);

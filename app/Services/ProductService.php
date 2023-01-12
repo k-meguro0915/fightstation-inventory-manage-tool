@@ -33,4 +33,15 @@ class ProductService{
     }
     return 'true';
   }
+  public function delete($product_id){
+    DB::beginTransaction();
+    try{
+      Product::where(['product_id'=>$product_id])->delete();
+      DB::commit();
+    } catch (\Exception $e) {
+      DB::rollback();
+      return $e->getMessage();
+    }
+    return 'true';
+  }
 }

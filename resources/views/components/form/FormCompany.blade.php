@@ -1,9 +1,11 @@
-<label for="companyId" class="">企業ID</label>
-<input name="company_id" class="mb-3 rounded" type="text" id="companyId" @if(!empty($company)) value="{{$company['company_id']}}" @endif @if($is_read==true) readonly="" @endif>
-<label for="managerId" class="">担当者ID</label>
-<input name="manager_id" class="mb-3 rounded" type="text" id="managerId" @if(!empty($company)) value="{{$company['manager_id']}}" @endif @if($is_read==true) readonly="" @endif>
-<label for="companyName" class="">企業名</label>
-<input name="company_name" class="mb-3 rounded" type="text" id="companyName" @if(!empty($company)) value="{{ $company['company_name'] }}" @endif @if($is_read==true) readonly="" @endif>
+@include('components/form/ValidateError')
+<label class="text-sm"><span class="text-red-500">*</span>は必須入力項目</label>
+<label for="companyId" class="">企業ID<span class="text-red-500">*</span></label>
+<input required name="company_id" class="mb-3 rounded" type="text" id="companyId" @if(!empty($company)) value="{{$company['company_id']}}" @endif @if($is_read==true) readonly="" @endif>
+<label for="managerId" class="">担当者ID<span class="text-red-500">*</span></label>
+<input required name="manager_id" class="mb-3 rounded" type="text" id="managerId" @if(!empty($company)) value="{{$company['manager_id']}}" @endif @if($is_read==true) readonly="" @endif>
+<label for="companyName" class="">企業名<span class="text-red-500">*</span></label>
+<input required name="company_name" class="mb-3 rounded" type="text" id="companyName" @if(!empty($company)) value="{{ $company['company_name'] }}" @endif @if($is_read==true) readonly="" @endif>
 <label for="prefecture" class="">都道府県</label>
 <input name="prefecture" class="mb-3 rounded" type="text" id="prefecture" @if(!empty($company)) value="{{ $company['prefecture'] }}" @endif @if($is_read==true) readonly="" @endif>
 <label for="address" class="">住所（市区町村以下）</label>

@@ -29,6 +29,11 @@ class CompanyController extends Controller
     ]);
   }
   public function confirm(Request $request){
+    $this->validate($request, [
+      'company_id' => 'required',
+      'manager_id' => 'required',
+      'company_name' => 'required',
+    ]);
     return view('ConfirmCompany',[
       "company" => $request
     ]);
@@ -36,6 +41,11 @@ class CompanyController extends Controller
   public function commit(Request $request){
     $ret = $this->service->commit($request);
     $message = $ret == 'true' ? '登録が完了しました。' : $ret;
+    return redirect('/company')->with('flash_message',$message);
+  }
+  public function delete($company_id){
+    $ret = $this->service->delete($company_id);
+    $message = $ret == 'true' ? '削除が完了しました。' : $ret;
     return redirect('/company')->with('flash_message',$message);
   }
 }

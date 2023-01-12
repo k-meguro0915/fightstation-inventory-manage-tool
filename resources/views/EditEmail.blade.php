@@ -6,7 +6,9 @@
 <div class="my-5">
   <form class="flex flex-col flex-wrap" action="/user/{user_id}/edit/email/commit" method="POST">
     @csrf
-    <label for="email" class="">メールアドレス</label>
+    @include('components/form/ValidateError')
+    <label class="text-sm"><span class="text-red-500">*</span>は必須入力項目</label>
+    <label for="email" class="">メールアドレス<span class="text-red-500">*</span></label>
     <input name="email" class="mb-3 rounded" type="text" id="email" @if(!empty($user['email'])) value="{{$user['email']}}" @endif>
     <input name="id" class="mb-3 rounded" type="hidden" id="id" @if(!empty($user['id'])) value="{{$user['id']}}" @endif>
     <div class="flex flex-col flex-wrap items-end">
