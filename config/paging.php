@@ -14,7 +14,7 @@
         'role' => 1
       ],
       [
-        'name' => '商品管理',
+        'name' => '商品マスタ管理',
         'ids' => 'product',
         'link' => '/products',
         'role' => 1
