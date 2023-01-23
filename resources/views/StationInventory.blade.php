@@ -14,6 +14,7 @@
         <th class="border" scope="col">導入企業ID</th>
         <th class="border" scope="col">ステーションID</th>
         <th class="border" scope="col">ステーション名</th>
+        <th class="border" scope="col">最新の補充日</th>
         <th class="border" scope="col">在庫確認・編集</th>
       </tr>
     </thead>
@@ -25,13 +26,13 @@
           <td class="border">{{$value['station_id']}}</td>
           <td class="border">{{$value['station_name']}}</td>
           <td class="border">
+          </td>
+          <td class="border">
             <a class="text-blue-500 hover:text-blue-400 underline" href="/inventory/check/{{$value['station_id']}}">在庫確認</a>
-            @if( $USER->id == 1 )
-              <label>/</label>
-              <a class="text-blue-500 hover:text-blue-400 underline" href="/stations/update/{{$value['station_id']}}">編集</a>
-              <label>/</label>
-              <a class="text-red-500 hover:text-red-400 underline" href="/stations/delete/{{$value['station_id']}}">削除</a>
-            @endif
+            <label>/</label>
+            <a class="text-blue-500 hover:text-blue-400 underline" href="/stations/discount/{{$value['station_id']}}">割引設定</a>
+            <label>/</label>
+            <a class="text-blue-500 hover:text-blue-400 underline" href="/stations/update/{{$value['station_id']}}">編集</a>
           </td>
         </tr>
       @endforeach

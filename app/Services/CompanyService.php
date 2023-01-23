@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class CompanyService{
   public function all(){
     $ret = [];
-    $rv = ImplementCompany::orderBy('company_id','asc')->get();
+    $rv = ImplementCompany::join('users','users.id','=','tbl_implementing_company.manager_id')->orderBy('company_id','asc')->get();
     return $rv;
   }
   public function get($company_id){

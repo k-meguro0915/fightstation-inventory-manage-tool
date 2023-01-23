@@ -2,13 +2,14 @@
 namespace App\Services;
 use Illuminate\Support\Facades\Log;
 use App\Models\StationInventory;
+use App\Models\Station;
+use App\Models\ReplenishmentLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class InventoryService{
   public function all(){
-    $ret = [];
-    $rv = StationInventory::orderBy('product_id','asc')->get();
+    $rv = StationInventory::join('tbl_log_replenishment','tbl_log_replenishment.station_id','=','tbl_station.station_id')->orderBy('product_id','asc')->get();
     return $rv;
   }
   public function get($station_id){
@@ -18,7 +19,9 @@ class InventoryService{
   public function commit($request){
     DB::beginTransaction();
     try{
+      $stationId="";
       foreach($request->inventory as $key => $value){
+        $stationId = $value['station_id'];
         $item=[
           'station_id' => $value['station_id'],
           'product_id' => $value['product_id'],
@@ -26,6 +29,10 @@ class InventoryService{
         ];
         StationInventory::where([['station_id', $value['station_id']],['product_id', $value['product_id']]])->update(['current_inventory' => $value['inventory']]);
       }
+      $array = [
+        'station_id' => $stationId,
+      ];
+      ReplenishmentLog::upsert($array,['station_id']);
       DB::commit();
     } catch (\Exception $e) {
       DB::rollback();

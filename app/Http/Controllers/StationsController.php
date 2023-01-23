@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Services\StationService;
 use App\Services\ProductService;
 use App\Services\InventoryService;
+use Illuminate\Support\Facades\Auth;
 
 class StationsController extends Controller
 {
@@ -20,6 +21,13 @@ class StationsController extends Controller
         "stations" => $list
       ]);
     }
+    public function manage_list(){
+      $userId = Auth::id();
+      $ret = $this->service->manage_list($userId);
+      return view('StationInventory',[
+        'stations' => $ret
+      ]);
+    }
     public function create(){
       $products_service = new ProductService;
       $products = $products_service->all();
@@ -28,12 +36,12 @@ class StationsController extends Controller
         'input_field' => 10
       ]);
     }
-    public function edit($request){
+    public function edit($station_id){
       $products_service = new ProductService;
       $products = $products_service->all();
       $inventory_service = new InventoryService;
-      $inventory = $inventory_service->get($request);
-      $ret = $this->service->get($request);
+      $inventory = $inventory_service->get($station_id);
+      $ret = $this->service->get($station_id);
       return view('EditStation',[
         'inventory' => $inventory,
         'products' => $products,
@@ -42,7 +50,6 @@ class StationsController extends Controller
       ]);
     }
     public function confirm(Request $request){
-      // $ret = $this->service->store($request);
       $this->validate($request, [
         'company_id' => 'required',
         'station_id' => 'required',
@@ -56,6 +63,7 @@ class StationsController extends Controller
     }
     public function commit(Request $request){
       $ret = $this->service->commit($request);
+      var_dump($ret);die();
       $message = $ret == 'true' ? '登録が完了しました。' : $ret;
       return redirect('/stations')->with('flash_message',$message);
     }

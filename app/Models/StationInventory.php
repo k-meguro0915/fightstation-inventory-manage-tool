@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class StationInventory extends Model
 {
     use HasFactory;
-    use SoftDeletes;
+    // use SoftDeletes;
     protected $table = 'tbl_station_inventory';
     protected $fillable = [
       'inventory_id',

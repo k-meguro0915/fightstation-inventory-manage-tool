@@ -10,7 +10,7 @@
     <thead>
       <tr>
         <th class="border" scope="col">ID</th>
-        <th class="border" scope="col">担当者ID</th>
+        <th class="border" scope="col">担当者名</th>
         <th class="border" scope="col">企業名</th>
         <th class="border" scope="col">住所</th>
         <th class="border" scope="col">編集/削除</th>
@@ -21,7 +21,7 @@
         <tr>
           <?php $value = $value->getAttributes();?>
           <td class="border">{{$value['company_id']}}</td>
-          <td class="border">{{$value['manager_id']}}</td>
+          <td class="border">{{$value['name']}}</td>
           <td class="border">{{$value['company_name']}}</td>
           <td class="border">{{$value['prefecture']}}{{$value['address']}}</td>
           <td class="border">

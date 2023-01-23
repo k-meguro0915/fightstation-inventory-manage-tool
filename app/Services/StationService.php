@@ -9,11 +9,15 @@ use Illuminate\Support\Facades\DB;
 class StationService{
   public function all(){
     $ret = [];
-    $rv = Station::orderBy('station_id','asc')->join('users','tbl_station.manager_id','=','users.id')->get();
-    return $rv;
+    $ret = Station::get();
+    return $ret;
   }
   public function get($station_id){
     $ret = Station::where('station_id',$station_id)->get();
+    return $ret;
+  }
+  public function manage_list($manager_id){
+    $ret = Station::where('manager_id',$manager_id)->join('tbl_log_replenishment','tbl_log_replenishment.station_id','=','tbl_station.station_id')->get();
     return $ret;
   }
   public function commit($request){
@@ -21,11 +25,11 @@ class StationService{
     try{
       $item=[
         'station_id' => $request->station_id,
+        'company_id' => $request->company_id,
         'station_name' => $request->station_name,
-        'prefecture' => $request->station_prefecture,
-        'address' => $request->station_address,
       ];
       Station::upsert($item,['station_id']);
+      StationInventory::where('station_id',$request->station_id)->delete();
       foreach($request->inventory as $key => $value){
         $item=[
           'station_id' => $request->station_id,
