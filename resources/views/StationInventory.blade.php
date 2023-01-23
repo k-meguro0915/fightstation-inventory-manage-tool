@@ -26,7 +26,11 @@
           <td class="border">{{$value['station_id']}}</td>
           <td class="border">{{$value['station_name']}}</td>
           <td class="border">
-            {{ date('Y年m月d日　　H時i分',strtotime($value['updated_at']) ) }}
+            @if(!empty($value['updated_at']))
+              {{ date('Y年m月d日　　H時i分',strtotime($value['updated_at']) ) }}
+            @else
+              -
+            @endif
           </td>
           <td class="border">
             <a class="text-blue-500 hover:text-blue-400 underline" href="/inventory/check/{{$value['station_id']}}">在庫確認</a>
