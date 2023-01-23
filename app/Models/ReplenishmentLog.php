@@ -10,7 +10,8 @@ class ReplenishmentLog extends Model
     use HasFactory;
     protected $table = 'tbl_log_replenishment';
     protected $fillable = [
-      'station_id'
+      'station_id',
+      'updated_at',
     ];
     protected $primaryKey = ['replenishment_id'];
 }

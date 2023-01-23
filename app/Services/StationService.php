@@ -18,7 +18,7 @@ class StationService{
     return $ret;
   }
   public function manage_list($manager_id){
-    $ret = Station::select(['tbl_implementing_company.company_id','tbl_station.station_id','tbl_station.station_name'])
+    $ret = Station::select(['tbl_implementing_company.company_id','tbl_station.station_id','tbl_station.station_name','tbl_log_replenishment.updated_at'])
             ->where('tbl_implementing_company.manager_id',$manager_id)
             ->leftjoin('tbl_log_replenishment','tbl_log_replenishment.station_id','=','tbl_station.station_id')
             ->join('tbl_implementing_company','tbl_implementing_company.company_id','=','tbl_station.company_id')
