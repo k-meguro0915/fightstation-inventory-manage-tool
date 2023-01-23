@@ -10,7 +10,9 @@ use Illuminate\Support\Facades\DB;
 class StationService{
   public function all(){
     $ret = [];
-    $ret = Station::get();
+    $ret = Station::select(['tbl_station.company_id','tbl_station.station_id','tbl_station.station_name','tbl_log_replenishment.updated_at'])
+            ->leftjoin('tbl_log_replenishment','tbl_log_replenishment.station_id','=','tbl_station.station_id')
+            ->get();
     return $ret;
   }
   public function get($station_id){
