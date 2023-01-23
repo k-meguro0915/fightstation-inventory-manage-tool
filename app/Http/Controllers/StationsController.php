@@ -16,16 +16,14 @@ class StationsController extends Controller
       $this->service = $service;
     }
     public function index(){
-      $list = $this->service->all();
+      $userId = Auth::id();
+      if($userId == 1){
+        $list = $this->service->all();
+      } else {
+        $list = $this->service->manage_list($userId);
+      }
       return view('StationInventory',[
         "stations" => $list
-      ]);
-    }
-    public function manage_list(){
-      $userId = Auth::id();
-      $ret = $this->service->manage_list($userId);
-      return view('StationInventory',[
-        'stations' => $ret
       ]);
     }
     public function create(){

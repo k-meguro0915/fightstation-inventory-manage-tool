@@ -17,15 +17,15 @@ class DiscountService{
     //         ->get();
     $ret = DB::select("
       SELECT
-        *
+        tbl_product.product_name,tbl_product.product_id,tbl_product.product_price,tbl_discount.discount_rate,tbl_station_inventory.station_id
       FROM
-        `tbl_station_inventory`
-        INNER JOIN `tbl_product` ON `tbl_product`.`product_id` = `tbl_station_inventory`.`product_id`
-        LEFT OUTER JOIN `tbl_discount` ON `tbl_discount`.`station_id` = `tbl_station_inventory`.`station_id`
-        AND `tbl_discount`.`product_id` = `tbl_product`.`product_id`
+        tbl_station_inventory
+        INNER JOIN tbl_product ON tbl_product.product_id = tbl_station_inventory.product_id
+        LEFT OUTER JOIN tbl_discount ON tbl_discount.station_id = tbl_station_inventory.station_id
+        AND tbl_discount.product_id = tbl_product.product_id
       WHERE
-        `tbl_station_inventory`.`station_id` = ?
-        AND `tbl_station_inventory`.`deleted_at` IS NULL
+        tbl_station_inventory.station_id = ?
+        AND tbl_station_inventory.deleted_at IS NULL
       ",[$station_id]);
     return $ret;
   }
