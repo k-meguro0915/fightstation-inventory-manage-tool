@@ -63,7 +63,6 @@ class StationsController extends Controller
     }
     public function commit(Request $request){
       $ret = $this->service->commit($request);
-      var_dump($ret);die();
       $message = $ret == 'true' ? '登録が完了しました。' : $ret;
       return redirect('/stations')->with('flash_message',$message);
     }
