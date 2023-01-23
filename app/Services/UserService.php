@@ -27,7 +27,7 @@ class UserService{
       ]);
       $user = User::create([
           'name' => $request->name,
-          'email' => $request->emailc,
+          'email' => $request->email,
           'password' => Hash::make($request->password),
       ]);
       DB::commit();
