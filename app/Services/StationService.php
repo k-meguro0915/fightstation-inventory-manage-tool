@@ -3,6 +3,7 @@ namespace App\Services;
 use Illuminate\Support\Facades\Log;
 use App\Models\Station;
 use App\Models\StationInventory;
+use App\Models\ImplementCompany;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -17,7 +18,11 @@ class StationService{
     return $ret;
   }
   public function manage_list($manager_id){
-    $ret = Station::where('manager_id',$manager_id)->join('tbl_log_replenishment','tbl_log_replenishment.station_id','=','tbl_station.station_id')->get();
+    $ret = Station::select(['tbl_implementing_company.company_id','tbl_station.station_id','tbl_station.station_name'])
+            ->where('tbl_implementing_company.manager_id',$manager_id)
+            ->leftjoin('tbl_log_replenishment','tbl_log_replenishment.station_id','=','tbl_station.station_id')
+            ->join('tbl_implementing_company','tbl_implementing_company.company_id','=','tbl_station.company_id')
+            ->get();
     return $ret;
   }
   public function commit($request){
