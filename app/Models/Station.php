@@ -12,7 +12,7 @@ class Station extends Model
     use SoftDeletes;
     protected $table = 'tbl_station';
     protected $fillable = [
-      'station_id',
+      'company_id',
       'station_name'
     ];
     protected $primaryKey = ['station_id'];

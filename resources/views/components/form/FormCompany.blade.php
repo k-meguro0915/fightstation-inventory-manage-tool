@@ -1,9 +1,18 @@
 @include('components/form/ValidateError')
-<label class="text-sm"><span class="text-red-500">*</span>は必須入力項目</label>
-<label for="companyId" class="">企業ID<span class="text-red-500">*</span></label>
-<input required name="company_id" class="mb-3 rounded" type="text" id="companyId" @if(!empty($company)) value="{{$company['company_id']}}" @endif @if($is_read==true) readonly="" @endif>
-<label for="managerId" class="">担当者ID<span class="text-red-500">*</span></label>
-<input required name="manager_id" class="mb-3 rounded" type="text" id="managerId" @if(!empty($company)) value="{{$company['manager_id']}}" @endif @if($is_read==true) readonly="" @endif>
+<label class="text-sm mb-5"><span class="text-red-500">*</span>は必須入力項目</label>
+<label for="managerId" class="">営業担当者<span class="text-red-500">*</span></label>
+@if($is_read == 'true')
+<input required name="manager_id" class="mb-3 rounded" type="hidden" id="managerId" @if(!empty($company)) value="{{ $company['manager_id'] }}" @endif @if($is_read==true) readonly="" @endif>
+<input required name="manager_name" class="mb-3 rounded" type="text" id="managerName" @if(!empty($manager)) value="{{ $manager['name'] }}" @endif @if($is_read==true) readonly="" @endif>
+@else
+<select class="mb-3 rounded" name="manager_id" aria-label="Default select">
+  <option value="">営業担当者を選択</option>
+  @foreach($managers as $key => $value)
+    <?php $value = $value->getAttributes();?>
+    <option value="{{$value['id']}}" @if( !empty($company['manager_id']) && $company['manager_id'] == $value['id'] ) selected @endif>{{$value['name']}}</option>
+  @endforeach
+</select>
+@endif
 <label for="companyName" class="">企業名<span class="text-red-500">*</span></label>
 <input required name="company_name" class="mb-3 rounded" type="text" id="companyName" @if(!empty($company)) value="{{ $company['company_name'] }}" @endif @if($is_read==true) readonly="" @endif>
 <label for="prefecture" class="">都道府県</label>

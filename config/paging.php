@@ -26,6 +26,12 @@
         'role' => 1
       ],
       // [
+      //   'name' => '売上グラフ',
+      //   'ids' => 'profits',
+      //   'link' => '/profits',
+      //   'role' => 1
+      // ],
+      // [
       //   'name' => 'ポイント設定',
       //   'ids' => 'point',
       //   'link' => '/config/point',

@@ -11,6 +11,8 @@ class ReplenishmentLog extends Model
     protected $table = 'tbl_log_replenishment';
     protected $fillable = [
       'station_id',
+      'product_id',
+      'quantity',
       'updated_at',
     ];
     protected $primaryKey = ['replenishment_id'];

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\CompanyService;
+use App\Services\UserService;
 
 class CompanyController extends Controller
 {
@@ -20,22 +21,31 @@ class CompanyController extends Controller
     ]);
   }
   public function create(){
-    return view('CreateCompany');
+    $user_service = new UserService;
+    $user = $user_service->all();
+    return view('CreateCompany',[
+      'managers' => $user
+    ]);
   }
   public function edit($company_id){
     $company = $this->service->get($company_id);
+    $user_service = new UserService;
+    $user = $user_service->all();
     return view('EditCompany',[
-      "company" => $company[0]->getAttributes()
+      "company" => $company[0]->getAttributes(),
+      'managers' => $user
     ]);
   }
   public function confirm(Request $request){
+    $user_service = new UserService;
+    $user = $user_service->get($request->manager_id);
     $this->validate($request, [
-      'company_id' => 'required',
       'manager_id' => 'required',
       'company_name' => 'required',
     ]);
     return view('ConfirmCompany',[
-      "company" => $request
+      "company" => $request,
+      'manager' => $user[0]->getAttributes()
     ]);
   }
   public function commit(Request $request){

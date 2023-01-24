@@ -9,11 +9,43 @@ use Illuminate\Support\Facades\DB;
 
 class InventoryService{
   public function all(){
-    $rv = StationInventory::join('tbl_log_replenishment','tbl_log_replenishment.station_id','=','tbl_station.station_id')->orderBy('product_id','asc')->get();
+    $rv = StationInventory::join('tbl_log_replenishment','tbl_log_replenishment.station_id','=','tbl_station.station_id')
+            ->orderBy('product_id','asc')
+            ->get();
     return $rv;
   }
   public function get($station_id){
-    $ret = StationInventory::where('station_id',$station_id)->join('tbl_product','tbl_station_inventory.product_id','=','tbl_product.product_id')->get();
+    $ret = StationInventory::select([
+              'tbl_product.product_name',
+              'tbl_station_inventory.product_id',
+              'tbl_station_inventory.station_id',
+              'tbl_station_inventory.inventory',
+              'tbl_station_inventory.current_inventory',
+              'tbl_log_replenishment.updated_at',
+            ])
+            ->where('tbl_station_inventory.station_id',$station_id)
+            ->join('tbl_product','tbl_station_inventory.product_id','=','tbl_product.product_id')
+            ->leftjoin('tbl_log_replenishment','tbl_log_replenishment.product_id','=','tbl_station_inventory.product_id')
+            ->get();
+    // $ret = DB::select("
+    //   SELECT
+    //     tbl_product.product_name,
+    //     tbl_station_inventory.product_id,
+    //     tbl_station_inventory.station_id,
+    //     tbl_station_inventory.inventory,
+    //     tbl_station_inventory.current_inventory,
+    //     tbl_log_replenishment.updated_at
+    //   FROM
+    //     tbl_station_inventory
+    //   INNER JOIN 
+    //     tbl_product ON tbl_station_inventory.product_id = tbl_product.product_id
+    //   LEFT OUTER JOIN 
+    //       tbl_log_replenishment ON tbl_log_replenishment.station_id = tbl_station_inventory.station_id
+    //     AND 
+    //       tbl_log_replenishment.product_id = tbl_station_inventory.product_id
+    //   WHERE
+    //     tbl_station_inventory.station_id = ?
+    //   ",[$station_id]);
     return $ret;
   }
   public function commit($request){
@@ -28,11 +60,16 @@ class InventoryService{
           'current_inventory' => $value['inventory'],
         ];
         StationInventory::where([['station_id', $value['station_id']],['product_id', $value['product_id']]])->update(['current_inventory' => $value['inventory']]);
+        // 補充する前後の在庫数に変動があった場合、ログを残す
+        if($value['inventory'] != $value['current_inventory']){
+          $array = [
+            'station_id' => $value['station_id'],
+            'product_id' => $value['product_id'],
+            'quantity' => intval($value['inventory']) - intval($value['current_inventory'])
+          ];
+          ReplenishmentLog::upsert($array,['station_id','product_id']);
+        }
       }
-      $array = [
-        'station_id' => $stationId,
-      ];
-      ReplenishmentLog::upsert($array,['station_id']);
       DB::commit();
     } catch (\Exception $e) {
       DB::rollback();
