@@ -10,7 +10,7 @@
     <thead>
       <tr>
         <th class="border" scope="col">営業担当者ID</th>
-        <th class="border" scope="col">担当者名</th>
+        <th class="border" scope="col">営業担当者名</th>
         <th class="border" scope="col">編集/削除</th>
       </tr>
     </thead>
