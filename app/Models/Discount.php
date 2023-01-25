@@ -12,7 +12,9 @@ class Discount extends Model
     protected $fillable = [
       'station_id',
       'product_id',
-      'rate'
+      'rate',
+      'start_date',
+      'end_date',
     ];
     protected $primaryKey = ['station_id','product_id'];
 }

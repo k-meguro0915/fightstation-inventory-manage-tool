@@ -9,10 +9,33 @@ use Illuminate\Support\Facades\DB;
 
 class InventoryService{
   public function all(){
-    $rv = StationInventory::join('tbl_log_replenishment','tbl_log_replenishment.station_id','=','tbl_station.station_id')
-            ->orderBy('product_id','asc')
+    $ret = [];
+    $ret = Station::select([
+              'tbl_implementing_company.company_name',
+              'tbl_station.station_id',
+              'tbl_station.station_name',
+              'users.name',DB::raw('MAX(tbl_log_replenishment.updated_at) as updated_at')
+            ])
+            ->leftjoin('tbl_log_replenishment','tbl_log_replenishment.station_id','=','tbl_station.station_id')
+            ->join('tbl_implementing_company','tbl_implementing_company.company_id','=','tbl_station.company_id')
+            ->join('users','tbl_implementing_company.manager_id','=','users.id')
+            ->whereNull('tbl_implementing_company.deleted_at')
+            ->groupBy('tbl_station.station_id')
             ->get();
-    return $rv;
+    return $ret;
+  }
+  public function manage_list($manager_id){
+    $ret = Station::select([
+              'tbl_implementing_company.company_name',
+              'tbl_station.station_id',
+              'tbl_station.station_name',
+              'tbl_log_replenishment.updated_at'
+            ])
+            ->where('tbl_implementing_company.manager_id',$manager_id)
+            ->leftjoin('tbl_log_replenishment','tbl_log_replenishment.station_id','=','tbl_station.station_id')
+            ->join('tbl_implementing_company','tbl_implementing_company.company_id','=','tbl_station.company_id')
+            ->get();
+    return $ret;
   }
   public function get($station_id){
     $ret = StationInventory::select([

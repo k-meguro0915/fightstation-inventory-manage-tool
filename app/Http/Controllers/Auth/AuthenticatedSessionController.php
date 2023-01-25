@@ -33,7 +33,7 @@ class AuthenticatedSessionController extends Controller
         if($user->id == 1){
           return redirect()->intended(RouteServiceProvider::HOME);
         } else {
-          return redirect('/stations');
+          return redirect('/inventory');
         }
     }
     /**

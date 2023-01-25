@@ -14,13 +14,12 @@ class StationService{
               'tbl_implementing_company.company_name',
               'tbl_station.station_id',
               'tbl_station.station_name',
-              'users.name',DB::raw('MAX(tbl_log_replenishment.updated_at) as updated_at')
+              'users.name'
             ])
-            ->leftjoin('tbl_log_replenishment','tbl_log_replenishment.station_id','=','tbl_station.station_id')
             ->join('tbl_implementing_company','tbl_implementing_company.company_id','=','tbl_station.company_id')
             ->join('users','tbl_implementing_company.manager_id','=','users.id')
             ->whereNull('tbl_implementing_company.deleted_at')
-            ->groupBy('tbl_station.station_id')
+            ->orderby('tbl_station.station_id')
             ->get();
     return $ret;
   }

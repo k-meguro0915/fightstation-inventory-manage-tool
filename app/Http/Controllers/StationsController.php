@@ -24,7 +24,7 @@ class StationsController extends Controller
       } else {
         $list = $this->service->manage_list($userId);
       }
-      return view('StationInventory',[
+      return view('ListStations',[
         "stations" => $list
       ]);
     }

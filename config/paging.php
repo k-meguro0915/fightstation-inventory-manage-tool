@@ -2,9 +2,9 @@
   return [
     'nav_bar' => [
       [
-        'name' => '導入企業管理',
-        'ids' => 'company',
-        'link' => '/company',
+        'name' => '商品マスタ管理',
+        'ids' => 'product',
+        'link' => '/products',
         'role' => 1
       ],
       [
@@ -14,15 +14,21 @@
         'role' => 1
       ],
       [
-        'name' => '商品マスタ管理',
-        'ids' => 'product',
-        'link' => '/products',
+        'name' => '導入企業管理',
+        'ids' => 'company',
+        'link' => '/company',
         'role' => 1
       ],
       [
         'name' => 'ファイトステーション管理',
         'ids' => 'stations',
         'link' => '/stations',
+        'role' => 1
+      ],
+      [
+        'name' => '在庫管理',
+        'ids' => 'inventory',
+        'link' => '/inventory',
         'role' => 1
       ],
       // [
@@ -45,8 +51,8 @@
       // ],
       [
         'name' => '在庫管理',
-        'ids' => 'station',
-        'link' => '/stations',
+        'ids' => 'inventory',
+        'link' => '/inventory',
         'role' => 2
       ],
       // [

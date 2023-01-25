@@ -17,7 +17,13 @@ class DiscountService{
     //         ->get();
     $ret = DB::select("
       SELECT
-        tbl_product.product_name,tbl_product.product_id,tbl_product.product_price,tbl_discount.discount_rate,tbl_station_inventory.station_id
+        tbl_product.product_name,
+        tbl_product.product_id,
+        tbl_product.product_price,
+        tbl_discount.discount_rate,
+        tbl_discount.start_date,
+        tbl_discount.end_date,
+        tbl_station_inventory.station_id
       FROM
         tbl_station_inventory
         INNER JOIN tbl_product ON tbl_product.product_id = tbl_station_inventory.product_id
@@ -36,7 +42,9 @@ class DiscountService{
         $item=[
           'station_id' => $value['station_id'],
           'product_id' => $value['product_id'],
-          'discount_rate' => $value['rate']
+          'discount_rate' => $value['rate'],
+          'start_date' => $value['start_date'],
+          'end_date' => $value['end_date']
         ];
         Discount::upsert($item,['station_id','product_id']);
       }

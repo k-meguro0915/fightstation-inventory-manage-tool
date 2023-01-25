@@ -12,12 +12,6 @@ class DiscountController extends Controller
   {
     $this->service = $service;
   }
-  public function index(){
-    $list = $this->service->all();
-    return view('StationInventory',[
-      "stations" => $list
-    ]);
-  }
   public function discount($station_id){
     $inventory = $this->service->getFromStation($station_id);
     return view('EditDiscount',[
@@ -27,6 +21,6 @@ class DiscountController extends Controller
   public function discountCommit(Request $request){
     $ret = $this->service->commit($request);
     $message = $ret == 'true' ? '登録が完了しました。' : $ret;
-    return redirect('/stations')->with('flash_message',$message);
+    return redirect('/inventory')->with('flash_message',$message);
   }
 }

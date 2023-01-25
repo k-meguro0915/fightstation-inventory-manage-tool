@@ -68,7 +68,7 @@ Route::get('/stations/delete/{station_id}',[StationsController::class,'delete'])
 Route::get('/stations/discount/{station_id}',[DiscountController::class,'discount']);
 Route::post('/stations/discount/update',[DiscountController::class,'discountCommit']);
 
-Route::get('/inventory',[StationsController::class,'manage_list']);
+Route::get('/inventory',[InventoryController::class,'index']);
 Route::get('/inventory/check/{station_id}',[InventoryController::class,'check']);
 Route::post('/inventory/commit',[InventoryController::class,'commit']);
 

@@ -7,14 +7,18 @@
     <th class="border" scope="col">金額</th>
     <th class="border" scope="col">割引率</th>
     <th class="border" scope="col">割引後の値段</th>
+    <th class="border" scope="col">開始日</th>
+    <th class="border" scope="col">終了日</th>
   </thead>
   <tbody>
     @foreach($inventory as $key => $value)
       <tr class="text-center">
         <td class="border p-2">{{$value->product_name}}</td>
         <td class="border p-2">{{$value->product_price}}円</td>
-        <td class="border p-2"><input type="text" id="price-discount-rate{{$key}}" name="discount[{{$key}}][rate]" value="{{$value->discount_rate}}" class="mb-3 rounded mx-2 w-40" onchange="showPrice({{$value->product_price}},{{$key}})"><span>%</span></td>
-        <td class="border p-2"><input type="number" step="1" id="price-after-discount{{$key}}" value="{{ floor($value->product_price * ( (100 - $value->discount_rate) / 100 )) }}" onchange="showRate({{$value->product_price}},this.value,{{$key}})" class="mb-3 rounded mx-2 w-40" onchange="showPrice(this.value,{{$value->product_price}},{{$key}})"><span>円</span></td>
+        <td class="border p-2"><input type="text" class="mb-3 rounded mx-2 w-40" id="price-discount-rate{{$key}}" name="discount[{{$key}}][rate]" value="{{$value->discount_rate}}" onchange="showPrice({{$value->product_price}},{{$key}})"><span>%</span></td>
+        <td class="border p-2"><input type="number" step="1" class="mb-3 rounded mx-2 w-40" id="price-after-discount{{$key}}" value="{{ floor($value->product_price * ( (100 - $value->discount_rate) / 100 )) }}" onchange="showRate({{$value->product_price}},this.value,{{$key}})" onchange="showPrice(this.value,{{$value->product_price}},{{$key}})"><span>円</span></td>
+        <td class="border p-2"><input type="datetime-local" class="mb-3 rounded mx-2" name="discount[{{$key}}][start_date]" @if(!empty($value->start_date)) value="{{ date('Y-m-d H:i:s',strtotime($value->start_date))}}" @endif></td>
+        <td class="border p-2"><input type="datetime-local" class="mb-3 rounded mx-2" name="discount[{{$key}}][end_date]" @if(!empty($value->end_date)) value="{{ date('Y-m-d H:i:s',strtotime($value->end_date))}}" @endif></td>
         <input type="hidden" name="discount[{{$key}}][station_id]" value="{{$value->station_id}}">
         <input type="hidden" name="discount[{{$key}}][product_id]" value="{{$value->product_id}}">
       </tr>
