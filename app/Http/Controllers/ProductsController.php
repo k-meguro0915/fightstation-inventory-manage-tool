@@ -32,7 +32,6 @@ class ProductsController extends Controller
     public function confirm(Request $request){
       // $ret = $this->service->store($request);
       $this->validate($request, [
-        'product_id' => 'required',
         'jan_code' => 'required|integer',
         'product_name' => 'required',
         'product_price' => 'required|integer|min:0',
