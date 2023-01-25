@@ -17,9 +17,10 @@ class ProductService{
   }
   public function commit($request){
     DB::beginTransaction();
+    $product_id = !empty($request->product_id) ? $request->product_id : null;
     try{
       $item=[
-        'product_id' => $request->product_id,
+        'product_id' => $product_id,
         'jan_code' => $request->jan_code,
         'product_name' => $request->product_name,
         'product_price' => $request->product_price,

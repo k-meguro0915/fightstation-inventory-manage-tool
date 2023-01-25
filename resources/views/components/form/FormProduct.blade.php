@@ -1,7 +1,5 @@
 @include('components/form/ValidateError')
 <label class="text-sm"><span class="text-red-500">*</span>は必須入力項目</label>
-<label for="productId" class="form-label">商品ID<span class="text-red-500">*</span></label>
-<input name="product_id" type="text" class="mb-3 rounded"id="productId" @if(!empty($product)) value="{{$product['product_id']}}" @endif @if($is_read==true) readonly="" @endif>
 <label for="janCode" class="form-label">JANコード<span class="text-red-500">*</span></label>
 <input name="jan_code" type="text" class="mb-3 rounded"id="janCode" minlength="8" maxlength="13" @if(!empty($product)) value="{{$product['jan_code']}}" @endif @if($is_read==true) readonly="" @endif>
 <label for="productName" class="form-label">商品名<span class="text-red-500">*</span></label>
