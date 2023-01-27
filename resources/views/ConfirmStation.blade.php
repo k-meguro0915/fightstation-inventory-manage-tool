@@ -5,11 +5,7 @@
 @section('content')
 <div class="my-5">
   <p class="mb-5">以下の情報で登録・更新します。確認の上、確定ボタンを押してください。</p>
-  @if(!empty($confirm->confirm_type))
-  <form class="flex flex-col flex-wrap" action="/stations/update" method="POST">
-  @else
   <form class="flex flex-col flex-wrap" action="/stations/commit" method="POST">
-  @endif
     @csrf
     <label for="companyId" class="form-label">導入企業</label>
     <input name="company_id" readonly="" type="hidden" id="companyId"  value="{{$confirm->company_id }}">

@@ -42,7 +42,6 @@ class StationsController extends Controller
       $ret = $this->service->get($station_id);
       return view('EditStation',[
         'station' => $ret[0]->getAttributes(),
-        'input_field' => 10,
         'company' => $company,
       ]);
     }

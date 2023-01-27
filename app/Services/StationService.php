@@ -43,11 +43,12 @@ class StationService{
   public function create($request){
     DB::beginTransaction();
     try{
-      $ret = Station::insertGetId(
+      $ret = Station::upsert(
         [
           'company_id' => intval($request->company_id),
-          'station_name' => $request->station_name
-        ]
+          'station_id' => $request->station_id,
+          'station_name' => $request->station_name,
+        ],['station_id']
       );
       DB::commit();
     } catch (\Exception $e) {
