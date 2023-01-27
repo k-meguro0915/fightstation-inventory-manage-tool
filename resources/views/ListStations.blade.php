@@ -13,7 +13,6 @@
       <tr>
         <th class="border" scope="col">導入企業名</th>
         <th class="border" scope="col">営業担当者名</th>
-        <th class="border" scope="col">ステーションID</th>
         <th class="border" scope="col">ステーション名</th>
         <th class="border" scope="col">編集・削除</th>
       </tr>
@@ -24,7 +23,6 @@
           <?php $value = $value->getAttributes();?>
           <td class="border">{{$value['company_name']}}</td>
           <td class="border">{{$value['name']}}</td>
-          <td class="border">{{$value['station_id']}}</td>
           <td class="border">{{$value['station_name']}}</td>
           <td class="border">
             <a class="text-blue-500 hover:text-blue-400 underline" href="/stations/edit/{{$value['station_id']}}">編集</a>

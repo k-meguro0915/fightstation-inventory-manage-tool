@@ -49,15 +49,6 @@ class StationService{
           'station_name' => $request->station_name
         ]
       );
-      foreach($request->inventory as $key => $value){
-        $item=[
-          'station_id' => $ret,
-          'product_id' => $value['product_id'],
-          'inventory' => $value['inventory'],
-          'current_inventory' => $value['inventory'],
-        ];
-        StationInventory::upsert($item,['station_id','product_id']);
-      }
       DB::commit();
     } catch (\Exception $e) {
       DB::rollback();

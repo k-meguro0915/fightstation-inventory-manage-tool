@@ -1,5 +1,5 @@
 @extends('layout/template')
-@section('title','営業担当者新規登録')
+@section('title','営業担当者編集')
 @section('description','ディスクリプション')
 
 @section('content')

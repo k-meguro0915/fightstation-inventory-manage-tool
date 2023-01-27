@@ -50,28 +50,28 @@ class InventoryService{
             ->join('tbl_product','tbl_station_inventory.product_id','=','tbl_product.product_id')
             ->leftjoin('tbl_log_replenishment','tbl_log_replenishment.product_id','=','tbl_station_inventory.product_id')
             ->get();
-    // $ret = DB::select("
-    //   SELECT
-    //     tbl_product.product_name,
-    //     tbl_station_inventory.product_id,
-    //     tbl_station_inventory.station_id,
-    //     tbl_station_inventory.inventory,
-    //     tbl_station_inventory.current_inventory,
-    //     tbl_log_replenishment.updated_at
-    //   FROM
-    //     tbl_station_inventory
-    //   INNER JOIN 
-    //     tbl_product ON tbl_station_inventory.product_id = tbl_product.product_id
-    //   LEFT OUTER JOIN 
-    //       tbl_log_replenishment ON tbl_log_replenishment.station_id = tbl_station_inventory.station_id
-    //     AND 
-    //       tbl_log_replenishment.product_id = tbl_station_inventory.product_id
-    //   WHERE
-    //     tbl_station_inventory.station_id = ?
-    //   ",[$station_id]);
     return $ret;
   }
   public function commit($request){
+    DB::beginTransaction();
+    try{
+      foreach($request->inventory as $key => $value){
+        $item=[
+          'station_id' => $request->station_id,
+          'product_id' => $value['product_id'],
+          'inventory' => $value['inventory'],
+          'current_inventory' => $value['inventory']
+        ];
+        StationInventory::upsert($item,['station_id','product_id']);
+      }
+      DB::commit();
+    } catch (\Exception $e) {
+      DB::rollback();
+      return $e->getMessage();
+    }
+    return 'true';
+  }
+  public function replenishment($request){
     DB::beginTransaction();
     try{
       $stationId="";

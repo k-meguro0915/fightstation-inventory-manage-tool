@@ -1,5 +1,5 @@
 @extends('layout/template')
-@section('title','ステーション情報登録')
+@section('title','ファイトステーション新規登録')
 @section('description','ディスクリプション')
 
 @section('content')

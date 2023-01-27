@@ -29,27 +29,18 @@ class StationsController extends Controller
       ]);
     }
     public function create(){
-      $products_service = new ProductService;
-      $products = $products_service->all();
       $company_service = new CompanyService;
       $company = $company_service->all();
       return view('CreateStation',[
-        'products' => $products,
         'input_field' => 10,
         'company' => $company
       ]);
     }
     public function edit($station_id){
-      $products_service = new ProductService;
-      $products = $products_service->all();
       $company_service = new CompanyService;
       $company = $company_service->all();
-      $inventory_service = new InventoryService;
-      $inventory = $inventory_service->get($station_id);
       $ret = $this->service->get($station_id);
       return view('EditStation',[
-        'inventory' => $inventory,
-        'products' => $products,
         'station' => $ret[0]->getAttributes(),
         'input_field' => 10,
         'company' => $company,
@@ -59,13 +50,10 @@ class StationsController extends Controller
       $this->validate($request, [
         'company_id' => 'required',
       ]);
-      $products_service = new ProductService;
-      $products = $products_service->all();
       $company_service = new CompanyService;
       $company = $company_service->get($request->company_id);
       return view('ConfirmStation',[
         'confirm' => $request,
-        'products' => $products,
         'company' => $company[0]->getAttributes(),
       ]);
     }

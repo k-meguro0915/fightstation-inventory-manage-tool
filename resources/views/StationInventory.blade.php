@@ -1,5 +1,5 @@
 @extends('layout/template')
-@section('title','ファイトステーション一覧')
+@section('title','在庫情報一覧')
 @section('description','ディスクリプション')
 
 @section('content')
@@ -10,9 +10,9 @@
         @if( $USER->id == 1 )
         <th class="border" scope="col">営業担当者名</th>
         @endif
-        <th class="border" scope="col">ステーションID</th>
         <th class="border" scope="col">ステーション名</th>
         <th class="border" scope="col">最終在庫補充日</th>
+        <th class="border" scope="col">在庫設定</th>
         <th class="border" scope="col">在庫確認</th>
         <th class="border" scope="col">割引設定</th>
       </tr>
@@ -25,7 +25,6 @@
           @if( $USER->id == 1 )
             <td class="border">{{$value['name']}}</td>
           @endif
-          <td class="border">{{$value['station_id']}}</td>
           <td class="border">{{$value['station_name']}}</td>
           <td class="border">
             @if(!empty($value['updated_at']))
@@ -33,6 +32,9 @@
             @else
               -
             @endif
+          </td>
+          <td class="border">
+            <a class="text-blue-500 hover:text-blue-400 underline" href="/inventory/create/{{$value['station_id']}}">在庫設定</a>
           </td>
           <td class="border">
             <a class="text-blue-500 hover:text-blue-400 underline" href="/inventory/check/{{$value['station_id']}}">在庫確認</a>

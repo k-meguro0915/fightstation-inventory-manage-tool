@@ -1,5 +1,5 @@
 @extends('layout/template')
-@section('title','商品新規登録')
+@section('title','商品確認')
 @section('description','ディスクリプション')
 
 @section('content')

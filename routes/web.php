@@ -69,7 +69,10 @@ Route::get('/stations/discount/{station_id}',[DiscountController::class,'discoun
 Route::post('/stations/discount/update',[DiscountController::class,'discountCommit']);
 
 Route::get('/inventory',[InventoryController::class,'index']);
+Route::get('/inventory/create/{station_id}',[InventoryController::class,'create']);
+Route::post('/inventory/confirm',[InventoryController::class,'confirm']);
 Route::get('/inventory/check/{station_id}',[InventoryController::class,'check']);
 Route::post('/inventory/commit',[InventoryController::class,'commit']);
+Route::post('/inventory/replenishment',[InventoryController::class,'replenishment']);
 
 Route::post('/config/point',[PointController::class,'index']);
