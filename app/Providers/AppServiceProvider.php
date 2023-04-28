@@ -24,6 +24,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // セキュア設定
+        if (request()->isSecure()) {
+            \URL::forceScheme('https');
+        }
         // view()->composer内でやっているのは、Authの情報を取るためなので、なくてもOK
         view()->composer('*', function ($view)
         {
